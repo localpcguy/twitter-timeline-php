@@ -6,14 +6,14 @@ Class TweetCollection {
 	private $tweetsHtmlUpdated;
 
 	public function __construct($twitterData) {
-		 _setTweets($twitterData);
+		 $this->_setTweets($twitterData);
 	}
 
 	private function _setTweets($twitterData) {
 		$this->tweets = array();
 		$i = 0;
 
-		foreach ($this->twitter_data as $tweet) {
+		foreach ($twitterData as $tweet) {
 			array_push($this->tweets, new Tweet($tweet));
 			++$i;
 		}
@@ -22,7 +22,7 @@ Class TweetCollection {
 	}
 
 	public function updateTweets($twitterData) {
-		 _setTweets($twitterData);
+		 $this->_setTweets($twitterData);
 	}
 
 	public function getTweetsHtml($wrapTag = 'div', $wrapClass = 'tweet-list') {

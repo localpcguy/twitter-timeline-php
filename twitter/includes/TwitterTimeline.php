@@ -1,10 +1,10 @@
 <?php
 
-require_once "includes/Tweet.php";
-require_once "includes/TweetCollection.php";
+require_once "twitter/includes/Tweet.php";
+require_once "twitter/includes/TweetCollection.php";
 
 // Require the OAuth class
-require_once('includes/twitter-api-oauth.php');
+require_once('twitter/includes/twitter-api-oauth.php');
 
 /**
  * twitter-timeline-php : Twitter API 1.1 user timeline implemented with PHP, a little JavaScript, and web intents
@@ -39,6 +39,16 @@ class TwitterTimeline
 			'oauth_access_token' => "",
 			'oauth_access_token_secret' => ""
 		);
+
+		// get settings information from file, do not source control
+		$configFile = '_utils/config.php';
+		if (is_file($configFile)) {
+			include $configFile;
+			$config = new Config();
+			$settings = $config->getSettings();
+		}
+
+		// print_r($settings);
 
 		// Set API request URL and timeline variables if needed <https://dev.twitter.com/docs/api/1.1>
 		$url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
