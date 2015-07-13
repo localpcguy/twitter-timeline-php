@@ -18,7 +18,12 @@
 	
 	<p><strong>Branding</strong>: <a class="twitter-branding" href="https://dev.twitter.com/docs/image-resources">Twitter logo</a> linking back to Twitter -or- <a href="https://dev.twitter.com/docs/follow-button">official Follow button</a> should be present.</p>
 	
-	<?php include_once('_includes/twitter.php'); ?>
+	<?php 
+		include_once('twitter/includes/TwitterTimeline.php'); 
+
+		$twitterTimeline = new TwitterTimeline('localpcguy', 200);
+		echo $twitterTimeline->tweets->getTweetsHtml();
+	?>
 	
 	<footer>
 		<a href="https://github.com/kmaida/twitter-timeline-php">twitter-timeline-php</a> on <a href="http://github.com">GitHub</a><br>
