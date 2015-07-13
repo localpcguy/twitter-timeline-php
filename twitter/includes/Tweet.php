@@ -37,8 +37,8 @@ Class Tweet {
 		//print_r($tweet);
 		if (!is_null($tweet)) {
 			# Retweet?
-			$this->_retweet = $tweet['retweeted_status'];
-			$this->isRetweet = !empty($this->retweet); 
+			$this->_retweet = isset($tweet['retweeted_status']) ? $tweet['retweeted_status'] : '';
+			$this->isRetweet = !empty($this->_retweet); 
 			
 			# Reply?
 			$this->originalUserId = $tweet['in_reply_to_status_id'];
@@ -47,10 +47,10 @@ Class Tweet {
 
 			# The user
 			# Tweet source user (could be a retweeted user and not the owner of the timeline)	
-			$user = $this->isRetweet ? $this->retweet['user'] : $tweet['user'];
-			$this->userHandle = $user['user']['name'];
-			$this->userScreenName = $user['user']['screen_name'];
-			$this->userAvatarURL = stripcslashes($user['user']['profile_image_url']);
+			$user = $this->isRetweet ? $this->_retweet['user'] : $tweet['user'];
+			$this->userHandle = $user['name'];
+			$this->userScreenName = $user['screen_name'];
+			$this->userAvatarURL = stripcslashes($user['profile_image_url']);
 			$this->userAccountURL = 'http://twitter.com/' . $this->userScreenName;
 
 			# Retweet - get the retweeter's name and screen name

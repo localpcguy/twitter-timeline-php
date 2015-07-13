@@ -41,7 +41,7 @@ class TwitterTimeline
 		);
 
 		// get settings information from file, do not source control
-		$configFile = '_utils/config.php';
+		$configFile = 'twitter/config/config.php';
 		if (is_file($configFile)) {
 			include $configFile;
 			$config = new Config();

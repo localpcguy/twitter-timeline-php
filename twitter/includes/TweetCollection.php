@@ -27,13 +27,16 @@ Class TweetCollection {
 
 	public function getTweetsHtml($wrapTag = 'div', $wrapClass = 'tweet-list') {
 		$tweetsHtmlFormat = '<%s class="%s">%s</%s>';
+		$tweetsHtml = '';
 
 		if (strlen($this->tweetsHtml) > strlen($tweetsHtmlFormat) && $this->tweetsHtmlUpdated) {
 			return $this->tweetsHtml;
 		}
 
-
-		$this->tweetsHtml = sprintf($tweetsHtmlFormat, $wrapTag, $wrapClass, $this->tweets, $wrapTag);
+		foreach ($this->tweets as $tweet) {
+			$tweetsHtml .= $tweet->getTweetHtml();
+		}
+		$this->tweetsHtml = sprintf($tweetsHtmlFormat, $wrapTag, $wrapClass, $tweetsHtml, $wrapTag);
 
 		$this->tweetsHtmlUpdated = true;
 
